@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @Slf4j
 @RestController
 public class TodoController {
@@ -29,7 +31,13 @@ public class TodoController {
     public ResponseEntity<String> delete(@PathVariable Long id)
     {
         log.info("inside delete method");
+        Optional<TodoList> b =todoRepository.findById(id);
+        if(b.isPresent()){
         todoService.delete(id);
-        return ResponseEntity.ok("User deleted");
+        return ResponseEntity.ok("Notes Deleted");}
+        else
+        {
+            return ResponseEntity.ok("Notes doesn't exists.");
+        }
     }
 }
