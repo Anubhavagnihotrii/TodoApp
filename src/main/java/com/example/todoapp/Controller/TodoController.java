@@ -3,12 +3,12 @@ package com.example.todoapp.Controller;
 import com.example.todoapp.Entity.TodoList;
 import com.example.todoapp.Repository.TodoRepository;
 import com.example.todoapp.Service.Interface.TodoService;
-import jakarta.persistence.GeneratedValue;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -40,4 +40,16 @@ public class TodoController {
             return ResponseEntity.ok("Notes doesn't exists.");
         }
     }
+
+    @GetMapping("showAll")
+    public List<TodoList> showTodo()
+    {
+        return todoService.showTodo();
+    }
+
+   @GetMapping("show/{id}")
+    public Optional<TodoList>showById( @PathVariable Long id)
+   {
+       return todoService.showTodoById(id);
+   }
 }
