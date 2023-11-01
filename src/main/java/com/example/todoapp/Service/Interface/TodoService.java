@@ -12,4 +12,6 @@ public interface TodoService {
     List<TodoList> showTodo();
 
     Optional<TodoList> showTodoById(Long id);
+
+    TodoList update(Long id, TodoList updatedTodoList);
 }

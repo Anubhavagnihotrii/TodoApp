@@ -34,5 +34,22 @@ public class TodoServiceImpl implements TodoService {
         return todoRepository.findById(id);
     }
 
+    @Override
+    public TodoList update(Long id, TodoList updatedTodoList) {
+        Optional<TodoList> todoOptional = todoRepository.findById(id);
+        if(todoOptional.isPresent())
+        {
+          TodoList todoList = todoOptional.get();
+          todoList.setTitle(updatedTodoList.getTitle());
+          todoList.setNote(updatedTodoList.getNote());
+
+          todoRepository.save(todoList);
+          return  todoList;
+        }
+        else {
+            throw new IllegalArgumentException("TodoList not found");
+        }
+    }
+
 
 }
